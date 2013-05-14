@@ -22,8 +22,12 @@ set noeol
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
+" Automatically re-indent on subsequent lines
+set autoindent
+" Automatically wrap text at 80 columns
+set tw=80
 if exists("&undodir")
-	set undodir=~/.vim/undo
+  set undodir=~/.vim/undo
 endif
 
 " Respect modeline in files
@@ -37,14 +41,17 @@ set number
 " Enable syntax highlighting
 syntax on
 " Highlight current line
-set cursorline
+"set cursorline
 " Make tabs as wide as two spaces
 set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
 " Show “invisible” characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 " Highlight searches
-set hlsearch
+" set hlsearch
 " Ignore case of searches
 set ignorecase
 " Highlight dynamically as pattern is typed
@@ -69,19 +76,19 @@ set title
 set showcmd
 " Use relative line numbers
 if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
+  set relativenumber
+  au BufReadPost * set relativenumber
 endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  :%s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
 endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
@@ -89,8 +96,35 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 " Automatic commands
 if has("autocmd")
-	" Enable file type detection
-	filetype on
-	" Treat .json files as .js
-	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+  " Enable file type detection
+  filetype on
+  " Treat .json files as .js
+  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+  autocmd Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+  autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+
 endif
+
+highlight NonText ctermfg=DarkMagenta
+highlight SpecialKey ctermfg=DarkMagenta
+
+function! LoadTemplate()
+  silent! 0r ~/.vim/skel/templ.%:e
+  " Highlight %VAR% placeholders with TODO color group
+  syn match Todo "%\u\+%" containedIn=ALL
+endfunction
+
+autocmd! BufNewFile * call LoadTemplate()
+
+nmap <silent> <F2> :set list!<CR>
+
+ab chglog <ESC>:r !date +\%m-%d-%y<CR>kJA -- EMM:
+
+" Some lorem ipsum texts
+ab loremclassic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin venenatis laoreet. Nulla et magna et turpis sollicitudin sagittis a sit amet neque. Pellentesque malesuada condimentum elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Etiam cursus convallis sem, vitae tristique nulla pellentesque sed. Integer eu ultrices erat. Aliquam erat volutpat. Aliquam non mollis purus. Curabitur nunc purus, tempor sed volutpat sed, dapibus in lectus. Proin rhoncus convallis augue, ut dignissim ligula fringilla et.
+
+ab lorembeer wheat beer glass dunkle; ale fermentation anaerobic ipa. primary fermentation final gravity, chocolate malt dextrin. additive specific gravity; kolsch ipa, " hefe." bung infusion, " becher dunkle original gravity attenuation hydrometer." goblet mead, copper crystal malt sour/acidic copper, barleywine bunghole.
+
+ab lorembacon Bacon ipsum dolor sit amet ribeye spare ribs drumstick brisket. Brisket pork short ribs swine ham meatball. Meatball short ribs strip steak boudin. Rump strip steak tongue, chuck beef ribs kielbasa chicken sausage filet mignon fatback turkey drumstick boudin pork belly. Cow tail ham swine, drumstick corned beef jerky t-bone frankfurter pancetta pastrami ball tip.
+
+ab loremcupcake Cotton candy tiramisu macaroon sweet roll croissant faworki chupa chups. Gingerbread wypas candy canes sugar plum jelly-o gummi bears cotton candy. Sweet pie toffee jelly-o cheesecake dessert. Icing jujubes halvah soufflé gummi bears gummies. Sweet apple pie gummi bears danish lollipop. Marshmallow tootsie roll tiramisu cookie liquorice bear claw jelly beans. Gummies biscuit liquorice dragée jelly beans topping cake. Dessert pastry candy jelly-o lemon drops jelly. Cake wafer wafer candy canes powder apple pie soufflé brownie chocolate cake. Gummi bears powder pie candy jujubes. Caramels gummi bears icing tootsie roll. Croissant wafer apple pie sugar plum. Pie cupcake lemon drops pudding chocolate cake donut gummies pie. Chocolate cheesecake candy croissant.

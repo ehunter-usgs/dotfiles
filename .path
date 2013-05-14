@@ -1,0 +1,31 @@
+# Begin :: PATH
+
+# Home directory
+PATH="${HOME}/bin:${HOME}/sbin"
+
+# ------------------------------------------------------------
+# Custom for certain applications
+# ------------------------------------------------------------
+
+# NPM
+PATH="${PATH}:/usr/local/share/npm/bin"
+
+# Brew coreutils
+PATH="${PATH}:/usr/local/opt/coreutils/libexec/gnubin"
+
+# Standard paths
+PATH="${PATH}:/usr/local/bin:/usr/bin:/bin"
+PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
+
+export PATH
+
+# End :: PATH
+
+
+# Begin :: MANPATH
+
+# brew coreutils
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+
+export MANPATH
+# End :: MANPATH
