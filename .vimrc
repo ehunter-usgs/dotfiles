@@ -10,8 +10,6 @@ set esckeys
 set backspace=indent,eol,start
 " Optimize for fast terminal connections
 set ttyfast
-" Add the g flag to search/replace by default
-set gdefault
 " Use UTF-8 without BOM
 set encoding=utf-8 nobomb
 " Change mapleader
@@ -40,18 +38,13 @@ set secure
 set number
 " Enable syntax highlighting
 syntax on
-" Highlight current line
-"set cursorline
 " Make tabs as wide as two spaces
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-set expandtab
 " Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set lcs=tab:→\ ,trail:·,eol:¬,nbsp:_
 set list
-" Highlight searches
-" set hlsearch
 " Ignore case of searches
 set ignorecase
 " Highlight dynamically as pattern is typed
