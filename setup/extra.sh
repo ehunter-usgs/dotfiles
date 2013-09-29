@@ -61,6 +61,7 @@ fi
 
 writeExtra "# ~/.extra";
 writeExtra "# created: `date`";
+writeExtra '';
 
 # Add server configurations
 read -p 'Would you like to configure server connections [y|N]: ' answer;

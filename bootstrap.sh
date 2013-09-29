@@ -25,22 +25,22 @@ else
 	fi
 fi
 
-read -p "Install packages etc...? (y/n)" -n 1 REPLY
+read -p "Install packages etc...? (y/n) " -n 1 REPLY
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	echo 'setup/brew.sh';
+	setup/brew.sh;
 fi
 
-read -p "Install extras? (y/n)" -n 1 REPLY
+read -p "Install extras? (y/n) " -n 1 REPLY
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	echo 'setup/extra.sh';
+	setup/extra.sh;
 fi
 
-read -p "Run Mountain Lion customization? (y/n)" -n 1 REPLY
+read -p "Run Mountain Lion customization? (y/n) " -n 1 REPLY
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	echo 'setup/osx-mlion.sh';
+	setup/osx-mlion.sh;
 fi
 
 unset doIt
