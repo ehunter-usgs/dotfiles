@@ -78,8 +78,8 @@ done
 echo 'Done configuring servers.';
 
 # Let user know about all .extra files in $HOME (so they can clean up)
-numExtra=`ls ${extra}.* | wc -l` 2> /dev/null;
-if [[ $? -eq 0 && $numExtra -gt 0 ]]; then
+numExtra=`ls ${extra}* | wc -l` 2> /dev/null;
+if [[ $? -eq 0 && $numExtra -gt 1 ]]; then
 	echo '';
 	echo 'Existing extra files found. Consider cleaning up.';
 	ls -l ${extra}.*
