@@ -29,6 +29,7 @@ read -p "Install packages etc...? (y/n) " -n 1 REPLY
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	setup/brew.sh;
+	setup/npm.sh;
 fi
 
 read -p "Install extras? (y/n) " -n 1 REPLY
