@@ -1,0 +1,12 @@
+# Custom stuff first
+PATH="${HOME}/bin:${HOME}/sbin";
+
+# Homebrew
+export PATH="${PATH}:${HOME}/homebrew/bin";
+
+# Standard stuff
+PATH="${PATH}:/usr/local/bin:/usr/bin:/bin";
+PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin";
+
+
+export PATH;

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+
+# Include CA bundle with DOIRootCA2.pem
+export CA_FILE="${HOME}/cacert.pem";
+export SSL_CERT_FILE="${CA_FILE}";
+export CURL_CA_BUNDLE="${CA_FILE}";
+
+# Include custom configurations
+for config in ~/.{aliases,bash_prompt,functions,path}; do
+  [ -r $config ] && source "$config";
+done
+
+# Configure NVM (Node)
+export NVM_DIR="${HOME}/.nvm"
+source "$(brew --prefix nvm)/nvm.sh"
+
+clear
